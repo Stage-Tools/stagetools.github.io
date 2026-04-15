@@ -20,136 +20,81 @@
     --text-dim: #9a9590;
     --text-muted: #5a5650;
   }
-  body { background: var(--surface); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; }
-
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(15,14,13,0.94);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 2.5rem;
-    display: flex; align-items: center;
-    height: 56px;
-  }
+  body { background: var(--surface); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(15,14,13,0.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); padding: 0 2.5rem; display: flex; align-items: center; height: 56px; }
   .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.1em; color: var(--amber); text-decoration: none; }
-
+  main { flex: 1; }
   .hero { padding: 6rem 2.5rem 5rem; max-width: 980px; margin: 0 auto; }
   .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 10vw, 100px); line-height: 0.93; letter-spacing: 0.02em; margin-bottom: 1.5rem; }
   .hero h1 span { color: var(--amber); }
   .hero p { font-size: 17px; color: var(--text-dim); max-width: 520px; line-height: 1.75; font-weight: 300; }
-
   .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border-bright), transparent); margin: 0 2.5rem; }
-
   .section { padding: 5rem 2.5rem; max-width: 980px; margin: 0 auto; }
   .section-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; color: var(--amber); text-transform: uppercase; margin-bottom: 0.75rem; }
   .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 0.04em; margin-bottom: 3rem; }
-
   .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-bright); border: 1px solid var(--border-bright); border-radius: 4px; overflow: hidden; }
   @media (max-width: 640px) { .tools-grid { grid-template-columns: 1fr; } }
-
-  .tool-card { background: var(--surface-2); padding: 2.5rem 2rem; transition: background 0.2s; display: flex; flex-direction: column; }
+  .tool-card { background: var(--surface-2); padding: 2.5rem 2rem; display: flex; flex-direction: column; text-decoration: none; color: inherit; transition: background 0.2s; }
   .tool-card:hover { background: var(--surface-3); }
-
   .tool-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; margin-bottom: 1.5rem; background: rgba(239,159,39,0.1); color: var(--amber); border: 1px solid rgba(239,159,39,0.22); align-self: flex-start; }
   .tool-icon { width: 40px; height: 40px; margin-bottom: 1.2rem; }
   .tool-icon svg { width: 38px; height: 38px; }
   .tool-name { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 0.04em; color: var(--text); margin-bottom: 0.3rem; }
   .tool-version { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-muted); margin-bottom: 1rem; letter-spacing: 0.08em; }
   .tool-desc { font-size: 13px; color: var(--text-dim); line-height: 1.75; margin-bottom: auto; padding-bottom: 1.75rem; font-weight: 300; }
-  .tool-links { display: flex; flex-direction: row; gap: 0.75rem; flex-wrap: wrap; align-items: center; padding-top: 1.75rem; border-top: 1px solid var(--border); }
-  .tool-link { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase; padding: 8px 16px; border-radius: 2px; text-decoration: none; transition: all 0.2s; white-space: nowrap; }
-  .link-download { background: var(--amber); color: var(--amber-dark); font-weight: 500; }
-  .link-download:hover { background: #f5b03a; }
-  .link-manual { border: 1px solid var(--border-bright); color: var(--text-dim); }
-  .link-manual:hover { color: var(--amber); border-color: var(--amber); }
-
-  .touch-section { margin: 0 auto 5rem; max-width: 920px; padding: 0 2.5rem; }
-  .touch-inner { border: 1px solid var(--border); border-radius: 4px; background: var(--surface-2); padding: 3rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; }
-  @media (max-width: 640px) { .touch-inner { grid-template-columns: 1fr; } }
-  .touch-inner h2 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
-  .touch-inner p { font-size: 14px; color: var(--text-dim); font-weight: 300; line-height: 1.75; max-width: 440px; }
-  .touch-actions { display: flex; flex-direction: column; gap: 0.75rem; min-width: 160px; }
-  .btn-primary { background: var(--amber); color: var(--amber-dark); font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.12em; font-weight: 500; padding: 12px 28px; border: none; border-radius: 2px; cursor: pointer; text-decoration: none; text-transform: uppercase; transition: background 0.2s; display: inline-block; text-align: center; }
-  .btn-primary:hover { background: #f5b03a; }
-  .btn-ghost { color: var(--text-dim); font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.12em; padding: 12px 28px; border: 1px solid var(--border-bright); border-radius: 2px; text-decoration: none; text-transform: uppercase; transition: all 0.2s; display: inline-block; text-align: center; }
-  .btn-ghost:hover { color: var(--amber); border-color: var(--amber); }
+  .tool-footer { display: flex; align-items: center; padding-top: 1.75rem; border-top: 1px solid var(--border); }
+  .tool-cta { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--amber); display: flex; align-items: center; gap: 6px; }
+  .tool-cta svg { width: 14px; height: 14px; transition: transform 0.2s; }
+  .tool-card:hover .tool-cta svg { transform: translateX(3px); }
+  footer { border-top: 1px solid var(--border); padding: 2rem 2.5rem; display: flex; justify-content: center; }
+  footer p { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 0.05em; }
+  footer a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: var(--text-dim); }
 </style>
 </head>
 <body>
-
 <nav>
-  <a class="nav-logo" href="#">Stage Tools</a>
+  <a class="nav-logo" href="index.html">Stage Tools</a>
 </nav>
-
-<div class="hero">
-  <h1>Tools built<br>for the <span>stage</span></h1>
-  <p>Lightweight utilities for live production professionals. Built in the field, for the field. Free to download and use.</p>
-</div>
-
-<div class="divider"></div>
-
-<div class="section">
-  <div class="section-label">Available now</div>
-  <div class="section-title">The toolkit</div>
-
-  <div class="tools-grid">
-
-    <div class="tool-card">
-      <div class="tool-badge">Stable</div>
-      <div class="tool-icon">
-        <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="5" y="15" width="28" height="20" rx="2" stroke="#EF9F27" stroke-width="1.5"/>
-          <path d="M13 15v-4.5a6 6 0 0 1 12 0V15" stroke="#EF9F27" stroke-width="1.5" stroke-linecap="round"/>
-          <circle cx="19" cy="25" r="2.5" fill="#EF9F27"/>
-          <line x1="19" y1="27.5" x2="19" y2="30.5" stroke="#EF9F27" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div class="tool-name">PC Locker</div>
-      <div class="tool-version">v0.10.6 · Windows 10/11</div>
-      <div class="tool-desc">A fullscreen overlay that instantly locks all keyboard input on every connected monitor — without closing or interrupting running applications. Designed for live shows, recording sessions, and unattended workstations.</div>
-      <div class="tool-links">
-        <a class="tool-link link-download" href="https://github.com/Stage-Tools/pc-locker/releases/download/v0.10.6/PCLocker_v0.10.6.exe">Download .exe</a>
-        <a class="tool-link link-manual" href="https://github.com/Stage-Tools/pc-locker/releases/download/v0.10.6/PCLocker_Manual_v0.10.6.pdf">Manual</a>
-      </div>
-    </div>
-
-    <div class="tool-card">
-      <div class="tool-badge">Stable</div>
-      <div class="tool-icon">
-        <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="19" cy="19" r="13" stroke="#EF9F27" stroke-width="1.5"/>
-          <circle cx="19" cy="19" r="4" fill="#EF9F27"/>
-          <line x1="19" y1="6" x2="19" y2="10" stroke="#EF9F27" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="19" y1="28" x2="19" y2="32" stroke="#EF9F27" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="6" y1="19" x2="10" y2="19" stroke="#EF9F27" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="28" y1="19" x2="32" y2="19" stroke="#EF9F27" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M10.5 10.5 L14.5 14.5 M23.5 23.5 L27.5 27.5 M10.5 27.5 L14.5 23.5 M23.5 14.5 L27.5 10.5" stroke="#EF9F27" stroke-width="1" stroke-linecap="round" opacity="0.45"/>
-        </svg>
-      </div>
-      <div class="tool-name">SMPTEye</div>
-      <div class="tool-version">v0.18.4 · Windows 10/11</div>
-      <div class="tool-desc">Reads LTC and MTC timecode simultaneously and displays them in a browser-based interface accessible from any device on the local network. No dedicated hardware required — just an audio or MIDI input.</div>
-      <div class="tool-links">
-        <a class="tool-link link-download" href="https://github.com/Stage-Tools/smpteye/releases/download/v0.18.4/SMPTEye-v0.18.4-portable.exe">Download .exe</a>
-        <a class="tool-link link-manual" href="https://github.com/Stage-Tools/smpteye/releases/download/v0.18.4/SMPTEye_Manual_v0.18.4.pdf">Manual</a>
-      </div>
-    </div>
-
+<main>
+  <div class="hero">
+    <h1>Tools built<br>for the <span>stage</span></h1>
+    <p>Lightweight utilities for live production professionals. Built in the field, for the field. Free to download and use.</p>
   </div>
-</div>
-
-<div class="touch-section">
-  <div class="touch-inner">
-    <div>
-      <h2>Get in touch</h2>
-      <p>Found a bug, have a feature request, or just want to share feedback? Open an issue on GitHub or start a discussion — every message is welcome.</p>
-    </div>
-    <div class="touch-actions">
-      <a class="btn-primary" href="https://github.com/Stage-Tools/pc-locker/issues/new">Open an issue</a>
-      <a class="btn-ghost" href="https://github.com/orgs/Stage-Tools/discussions">Discussions</a>
+  <div class="divider"></div>
+  <div class="section">
+    <div class="section-label">Available now</div>
+    <div class="section-title">The toolkit</div>
+    <div class="tools-grid">
+      <a class="tool-card" href="pc-locker.html">
+        <div class="tool-badge">Stable</div>
+        <div class="tool-icon">
+          <svg viewBox="0 0 38 38" fill="none"><rect x="5" y="15" width="28" height="20" rx="2" stroke="#EF9F27" stroke-width="1.5"/><path d="M13 15v-4.5a6 6 0 0 1 12 0V15" stroke="#EF9F27" stroke-width="1.5" stroke-linecap="round"/><circle cx="19" cy="25" r="2.5" fill="#EF9F27"/><line x1="19" y1="27.5" x2="19" y2="30.5" stroke="#EF9F27" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="tool-name">PC Locker</div>
+        <div class="tool-version">v0.10.6 · Windows 10/11</div>
+        <div class="tool-desc">A fullscreen overlay that instantly locks all keyboard input on every connected monitor — without closing or interrupting running applications.</div>
+        <div class="tool-footer">
+          <span class="tool-cta">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#EF9F27" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </a>
+      <a class="tool-card" href="smpteye.html">
+        <div class="tool-badge">Stable</div>
+        <div class="tool-icon">
+          <svg viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="13" stroke="#EF9F27" stroke-width="1.5"/><circle cx="19" cy="19" r="4" fill="#EF9F27"/><line x1="19" y1="6" x2="19" y2="10" stroke="#EF9F27" stroke-width="1.5" stroke-linecap="round"/><line x1="19" y1="28" x2="19" y2="32" stroke="#EF9F27" stroke-width="1.5" stroke-linecap="round"/><line x1="6" y1="19" x2="10" y2="19" stroke="#EF9F27" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="19" x2="32" y2="19" stroke="#EF9F27" stroke-width="1.5" stroke-linecap="round"/><path d="M10.5 10.5 L14.5 14.5 M23.5 23.5 L27.5 27.5 M10.5 27.5 L14.5 23.5 M23.5 14.5 L27.5 10.5" stroke="#EF9F27" stroke-width="1" stroke-linecap="round" opacity="0.45"/></svg>
+        </div>
+        <div class="tool-name">SMPTEye</div>
+        <div class="tool-version">v0.18.4 · Windows 10/11</div>
+        <div class="tool-desc">Reads LTC and MTC timecode simultaneously and displays them in a browser-based interface accessible from any device on the local network.</div>
+        <div class="tool-footer">
+          <span class="tool-cta">Learn more <svg viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="#EF9F27" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </a>
     </div>
   </div>
-</div>
-
+</main>
+<footer>
+  <p>Made by <a href="https://github.com/NessiRiccardo" target="_blank">Riccardo Nessi</a></p>
+</footer>
 </body>
 </html>

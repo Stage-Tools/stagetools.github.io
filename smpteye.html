@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMPTEye · Stage Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --amber: #EF9F27; --amber-dark: #412402; --surface: #0f0e0d; --surface-2: #181714; --surface-3: #221f1b;
+    --border: rgba(239,159,39,0.13); --border-bright: rgba(239,159,39,0.32);
+    --text: #f0ece4; --text-dim: #9a9590; --text-muted: #5a5650;
+  }
+  body { background: var(--surface); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(15,14,13,0.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); padding: 0 2.5rem; display: flex; align-items: center; gap: 0.75rem; height: 56px; }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.1em; color: var(--amber); text-decoration: none; }
+  .nav-sep { color: var(--text-muted); font-family: 'DM Mono', monospace; font-size: 14px; }
+  .nav-current { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: var(--text-dim); }
+  main { flex: 1; }
+  .hero { padding: 5rem 2.5rem 4rem; max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: end; }
+  @media (max-width: 640px) { .hero { grid-template-columns: 1fr; } }
+  .hero-icon { width: 56px; height: 56px; margin-bottom: 1.5rem; }
+  .hero-icon svg { width: 56px; height: 56px; }
+  .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(50px, 8vw, 80px); line-height: 0.93; letter-spacing: 0.02em; margin-bottom: 1rem; }
+  .hero-version { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 0.08em; margin-bottom: 1.25rem; }
+  .hero p { font-size: 16px; color: var(--text-dim); max-width: 520px; line-height: 1.75; font-weight: 300; }
+  .hero-actions { display: flex; flex-direction: column; gap: 0.75rem; min-width: 160px; }
+  .btn-primary { background: var(--amber); color: var(--amber-dark); font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.12em; font-weight: 500; padding: 12px 24px; border: none; border-radius: 2px; text-decoration: none; text-transform: uppercase; transition: background 0.2s; display: inline-block; text-align: center; white-space: nowrap; }
+  .btn-primary:hover { background: #f5b03a; }
+  .btn-ghost { color: var(--text-dim); font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.12em; padding: 12px 24px; border: 1px solid var(--border-bright); border-radius: 2px; text-decoration: none; text-transform: uppercase; transition: all 0.2s; display: inline-block; text-align: center; white-space: nowrap; }
+  .btn-ghost:hover { color: var(--amber); border-color: var(--amber); }
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border-bright), transparent); margin: 0 2.5rem; }
+  .section { padding: 4rem 2.5rem; max-width: 980px; margin: 0 auto; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em; color: var(--amber); text-transform: uppercase; margin-bottom: 0.75rem; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 0.04em; margin-bottom: 2.5rem; }
+  .features-list { display: flex; flex-direction: column; }
+  .feature { padding: 1.5rem 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 220px 1fr; gap: 2rem; align-items: baseline; }
+  .feature:first-child { border-top: 1px solid var(--border); }
+  @media (max-width: 640px) { .feature { grid-template-columns: 1fr; gap: 0.4rem; } }
+  .feature-title { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber); }
+  .feature-desc { font-size: 14px; color: var(--text-dim); line-height: 1.75; font-weight: 300; }
+  .touch-inner { border: 1px solid var(--border); border-radius: 4px; background: var(--surface-2); padding: 3rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; }
+  @media (max-width: 640px) { .touch-inner { grid-template-columns: 1fr; } }
+  .touch-inner h2 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+  .touch-inner p { font-size: 14px; color: var(--text-dim); font-weight: 300; line-height: 1.75; }
+  .touch-actions { display: flex; flex-direction: column; gap: 0.75rem; min-width: 160px; }
+  footer { border-top: 1px solid var(--border); padding: 2rem 2.5rem; display: flex; justify-content: center; }
+  footer p { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 0.05em; }
+  footer a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: var(--text-dim); }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Stage Tools</a>
+  <span class="nav-sep">/</span>
+  <span class="nav-current">SMPTEye</span>
+</nav>
+<main>
+  <div class="hero">
+    <div>
+      <div class="hero-icon">
+        <svg viewBox="0 0 56 56" fill="none"><circle cx="28" cy="28" r="19" stroke="#EF9F27" stroke-width="2"/><circle cx="28" cy="28" r="6" fill="#EF9F27"/><line x1="28" y1="9" x2="28" y2="15" stroke="#EF9F27" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="41" x2="28" y2="47" stroke="#EF9F27" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="28" x2="15" y2="28" stroke="#EF9F27" stroke-width="2" stroke-linecap="round"/><line x1="41" y1="28" x2="47" y2="28" stroke="#EF9F27" stroke-width="2" stroke-linecap="round"/><path d="M15.5 15.5 L21 21 M35 35 L40.5 40.5 M15.5 40.5 L21 35 M35 21 L40.5 15.5" stroke="#EF9F27" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/></svg>
+      </div>
+      <h1>SMPTEye</h1>
+      <div class="hero-version">v0.18.4 · Windows 10/11</div>
+      <p>Reads LTC and MTC timecode simultaneously and displays them in a browser-based interface accessible from any device on the local network. No dedicated hardware required — just an audio or MIDI input.</p>
+    </div>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://github.com/Stage-Tools/smpteye/releases/download/v0.18.4/SMPTEye-v0.18.4-portable.exe">Download .exe</a>
+      <a class="btn-ghost" href="https://github.com/Stage-Tools/smpteye/releases/download/v0.18.4/SMPTEye_Manual_v0.18.4.pdf">Manual</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="section-label">Overview</div>
+    <div class="section-title">How it works</div>
+    <div class="features-list">
+      <div class="feature">
+        <div class="feature-title">LTC support</div>
+        <div class="feature-desc">Reads Linear Timecode via any audio interface with a line input. Signal level is monitored in real time with a visual indicator.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-title">MTC support</div>
+        <div class="feature-desc">Reads MIDI Timecode from any hardware or virtual MIDI port. Compatible with loopMIDI for software-based timecode sources.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-title">Multi-source</div>
+        <div class="feature-desc">Monitor multiple LTC and MTC sources simultaneously. Each source appears as a card with its own timecode display and status.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-title">Browser-based UI</div>
+        <div class="feature-desc">The interface runs in any browser on any device on the local network — laptop, tablet, phone. No app to install on remote devices.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-title">Auto frame rate detection</div>
+        <div class="feature-desc">Frame rate is detected automatically from the incoming signal. Supports 24, 25, 29.97 DF/NDF, and 30 fps.</div>
+      </div>
+      <div class="feature">
+        <div class="feature-title">Start with Windows</div>
+        <div class="feature-desc">Optional autostart on boot. The server is ready before you open a browser — useful for always-on monitoring setups.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section">
+    <div class="touch-inner">
+      <div>
+        <h2>Get in touch</h2>
+        <p>Found a bug or have a feature request? Open an issue or start a discussion on GitHub.</p>
+      </div>
+      <div class="touch-actions">
+        <a class="btn-primary" href="https://github.com/Stage-Tools/smpteye/issues/new">Open an issue</a>
+        <a class="btn-ghost" href="https://github.com/Stage-Tools/smpteye/discussions">Discussions</a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <p>Made by <a href="https://github.com/NessiRiccardo" target="_blank">Riccardo Nessi</a></p>
+</footer>
+</body>
+</html>
